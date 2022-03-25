@@ -54,10 +54,11 @@ const Layout = ({ children }) => {
         </Toolbar>
       </AppBar>
       <Drawer
+        className={classes.layout__drawer}
         sx={{ width: drawerWidth }}
         variant="permanent"
         anchor="left"
-        classes={{ paper: classes.layout__drawerPaper }}
+        classes={{ paper: classes.layout__drawer_Paper }}
       >
         <List>
           {menuItems.map((item) => {
