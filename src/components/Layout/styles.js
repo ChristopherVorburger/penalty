@@ -15,13 +15,26 @@ export default makeStyles((theme) => ({
       display: "none",
     },
   },
-  layout__drawer_Paper: {
+  layout__drawer_paper: {
     width: drawerWidth,
   },
-  layout__menuIcon: {
+  layout__menu_icon: {
     color: `${theme.palette.primary.main}!important`,
   },
   layout__link_active: {
     backgroundColor: "#f4f4f4!important",
+  },
+  layout__menu_burger: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+    [theme.breakpoints.down("sm")]: {
+      flexGrow: "1",
+    },
+  },
+  layout__welcome_text: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
 }));

@@ -6,6 +6,7 @@ import {
   AppBar,
   Box,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -20,6 +21,7 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import MenuIcon from "@mui/icons-material/Menu";
 
 // Import styles
 import useStyles, { drawerWidth } from "./styles";
@@ -49,8 +51,32 @@ const Layout = ({ children }) => {
   return (
     <Box display="flex">
       <AppBar className={classes.layout__appbar} elevation={0}>
-        <Toolbar>
-          <Typography>Welcome</Typography>
+        <Toolbar sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box className={classes.layout__menu_burger}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+          <Box className={classes.layout__welcome_text} flexGrow="1">
+            <Typography>Welcome Text</Typography>
+          </Box>
+          <Box display="flex">
+            <Box mr="1rem">
+              <Typography>Hello, Name</Typography>
+            </Box>
+            <Box>
+              <Typography mr="1rem">Icon</Typography>
+            </Box>
+            <Box>
+              <Typography>Button</Typography>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -58,7 +84,7 @@ const Layout = ({ children }) => {
         sx={{ width: drawerWidth }}
         variant="permanent"
         anchor="left"
-        classes={{ paper: classes.layout__drawer_Paper }}
+        classes={{ paper: classes.layout__drawer_paper }}
       >
         <List>
           {menuItems.map((item) => {
@@ -74,7 +100,7 @@ const Layout = ({ children }) => {
                 button={true}
                 sx={{ p: "1rem" }}
               >
-                <ListItemIcon classes={{ root: classes.layout__menuIcon }}>
+                <ListItemIcon classes={{ root: classes.layout__menu_icon }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />
