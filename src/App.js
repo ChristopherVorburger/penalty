@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import PenaltyApp from "./components/PenaltyApp";
+
 function App() {
-  return <div>Hello World</div>;
+  return <PenaltyApp />;
 }
 
 export default App;
