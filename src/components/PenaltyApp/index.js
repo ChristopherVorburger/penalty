@@ -19,7 +19,7 @@ function PenaltyApp() {
     <ThemeProvider theme={theme}>
       <Router>
         <Layout>
-          <Typography variant="h1">Hello World</Typography>
+          <Typography variant="h3">Hello World</Typography>
         </Layout>
       </Router>
     </ThemeProvider>

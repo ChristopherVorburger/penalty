@@ -3,12 +3,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 // MUI components
 import {
+  AppBar,
   Box,
   Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Toolbar,
+  Typography,
 } from "@mui/material";
 
 // MUI icons
@@ -45,6 +48,11 @@ const Layout = ({ children }) => {
   ];
   return (
     <Box display="flex">
+      <AppBar className={classes.layout__appbar} elevation={0}>
+        <Toolbar>
+          <Typography>Welcome</Typography>
+        </Toolbar>
+      </AppBar>
       <Drawer
         sx={{ width: drawerWidth }}
         variant="permanent"
@@ -75,6 +83,8 @@ const Layout = ({ children }) => {
         </List>
       </Drawer>
       <Box>
+        {/* Make a space to down children below the toolbar */}
+        <Box className={classes.layout__toolbar}></Box>
         <Box sx={{ background: "#E5E1E6", width: "100%" }}>{children}</Box>
       </Box>
     </Box>
