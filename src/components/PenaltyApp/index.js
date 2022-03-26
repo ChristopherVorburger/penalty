@@ -1,8 +1,12 @@
+import * as React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
 
 import Layout from "../Layout";
-import { BrowserRouter as Router } from "react-router-dom";
+
+import { PenaltiesContextProvider } from "../../contexte/penaltiesContext";
 
 const theme = createTheme({
   typography: {
@@ -17,11 +21,13 @@ const theme = createTheme({
 function PenaltyApp() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Layout>
-          <Typography variant="h3">Hello World</Typography>
-        </Layout>
-      </Router>
+      <PenaltiesContextProvider>
+        <Router>
+          <Layout>
+            <Typography variant="h3">Hello World</Typography>
+          </Layout>
+        </Router>
+      </PenaltiesContextProvider>
     </ThemeProvider>
   );
 }
