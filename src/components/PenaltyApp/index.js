@@ -1,10 +1,10 @@
 import * as React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Typography } from "@mui/material";
 
 import Layout from "../Layout";
+import Home from "../../pages/Home";
 
 import { PenaltiesContextProvider } from "../../contexte/penaltiesContext";
 
@@ -24,7 +24,9 @@ function PenaltyApp() {
       <PenaltiesContextProvider>
         <Router>
           <Layout>
-            <Typography variant="h3">Hello World</Typography>
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+            </Routes>
           </Layout>
         </Router>
       </PenaltiesContextProvider>

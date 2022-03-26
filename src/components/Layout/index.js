@@ -187,10 +187,17 @@ const Layout = ({ children }) => {
           })}
         </List>
       </Drawer>
-      <Box>
+      <Box sx={{ width: "100%", margin: "auto" }}>
         {/* Make a space to down children below the toolbar */}
         <Box className={classes.layout__toolbar}></Box>
-        <Box sx={{ background: "#E5E1E6", width: "100%" }}>{children}</Box>
+        <Box
+          sx={{
+            background: "#f4f4f4",
+            height: "100vh",
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </Box>
   );
