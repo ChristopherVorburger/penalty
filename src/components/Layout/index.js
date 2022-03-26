@@ -4,7 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 // MUI components
 import {
   AppBar,
+  Avatar,
   Box,
+  Button,
   Drawer,
   IconButton,
   List,
@@ -25,6 +27,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 // Import styles
 import useStyles, { drawerWidth } from "./styles";
+import PendingPhrase from "../PendingPhrase";
+import { adminAvatarUrl } from "../../utils/helpers";
 
 // Layout component to display drawer and appBar
 const Layout = ({ children }) => {
@@ -64,17 +68,19 @@ const Layout = ({ children }) => {
             </IconButton>
           </Box>
           <Box className={classes.layout__welcome_text} flexGrow="1">
-            <Typography>Welcome Text</Typography>
+            <PendingPhrase />
           </Box>
-          <Box display="flex">
+          <Box display="flex" ml="2rem" alignItems="center">
             <Box mr="1rem">
               <Typography>Hello, Name</Typography>
             </Box>
-            <Box>
-              <Typography mr="1rem">Icon</Typography>
+            <Box mr="1rem">
+              <Avatar src={adminAvatarUrl} />
             </Box>
             <Box>
-              <Typography>Button</Typography>
+              <Button variant="outlined" color="inherit">
+                Button
+              </Button>
             </Box>
           </Box>
         </Toolbar>
