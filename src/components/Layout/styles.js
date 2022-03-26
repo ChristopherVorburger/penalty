@@ -37,4 +37,9 @@ export default makeStyles((theme) => ({
       display: "none",
     },
   },
+  layout__username: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  },
 }));

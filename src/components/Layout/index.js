@@ -13,6 +13,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -32,9 +34,22 @@ import { adminAvatarUrl } from "../../utils/helpers";
 
 // Layout component to display drawer and appBar
 const Layout = ({ children }) => {
+  // States for modale
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  // Hooks
   const classes = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Functions to open and close modale
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   // Items to display drawer
   const menuItems = [
@@ -56,8 +71,10 @@ const Layout = ({ children }) => {
     <Box display="flex">
       <AppBar className={classes.layout__appbar} elevation={0}>
         <Toolbar sx={{ display: "flex", justifyContent: "flex-end" }}>
+          {/* Burger menu */}
           <Box className={classes.layout__menu_burger}>
             <IconButton
+              onClick={handleClick}
               size="large"
               edge="start"
               color="inherit"
@@ -66,17 +83,71 @@ const Layout = ({ children }) => {
             >
               <MenuIcon />
             </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("/");
+                }}
+              >
+                Accueil
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("/heouss");
+                }}
+              >
+                Liste des contraventions
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("/heouss/add");
+                }}
+              >
+                Dresser un procès-verbal
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("/gallery");
+                }}
+              >
+                Galerie
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate("memory-game");
+                }}
+              >
+                Beu Game
+              </MenuItem>
+            </Menu>
           </Box>
+          {/* Welcome text */}
           <Box className={classes.layout__welcome_text} flexGrow="1">
             <PendingPhrase />
           </Box>
           <Box display="flex" ml="2rem" alignItems="center">
-            <Box mr="1rem">
+            {/* Display user name */}
+            <Box className={classes.layout__username} mr="1rem">
               <Typography>Hello, Name</Typography>
             </Box>
+            {/* Display user avatar */}
             <Box mr="1rem">
               <Avatar src={adminAvatarUrl} />
             </Box>
+            {/* Button Login/Logout */}
             <Box>
               <Button variant="outlined" color="inherit">
                 Button
@@ -85,6 +156,7 @@ const Layout = ({ children }) => {
           </Box>
         </Toolbar>
       </AppBar>
+      {/* Left drawer */}
       <Drawer
         className={classes.layout__drawer}
         sx={{ width: drawerWidth }}
