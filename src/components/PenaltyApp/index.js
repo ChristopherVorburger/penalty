@@ -6,7 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Layout from "../Layout";
 import Home from "../../pages/Home";
 
-import { PenaltiesContextProvider } from "../../contexte/penaltiesContext";
+import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
 
 const theme = createTheme({
   typography: {
