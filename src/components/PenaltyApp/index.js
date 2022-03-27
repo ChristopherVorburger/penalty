@@ -5,8 +5,10 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Layout from "../Layout";
 import Home from "../../pages/Home";
+import Login from "../../pages/Login";
 
 import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
+import { AuthContextProvider } from "../../contexts/authContext";
 
 const theme = createTheme({
   typography: {
@@ -21,15 +23,18 @@ const theme = createTheme({
 function PenaltyApp() {
   return (
     <ThemeProvider theme={theme}>
-      <PenaltiesContextProvider>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />}></Route>
-            </Routes>
-          </Layout>
-        </Router>
-      </PenaltiesContextProvider>
+      <Router>
+        <PenaltiesContextProvider>
+          <AuthContextProvider>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+              </Routes>
+            </Layout>
+          </AuthContextProvider>
+        </PenaltiesContextProvider>
+      </Router>
     </ThemeProvider>
   );
 }

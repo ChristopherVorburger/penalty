@@ -32,6 +32,9 @@ import useStyles, { drawerWidth } from "./styles";
 import PendingPhrase from "../PendingPhrase";
 import { adminAvatarUrl } from "../../utils/helpers";
 
+// Contexts
+import { useAuth } from "../../contexts/authContext";
+
 // Layout component to display drawer and appBar
 const Layout = ({ children }) => {
   // States for modale
@@ -42,6 +45,7 @@ const Layout = ({ children }) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
+  const { authUser: auth, handleLogout } = useAuth();
 
   // Functions to open and close modale
   const handleClick = (event) => {
@@ -49,6 +53,12 @@ const Layout = ({ children }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  // Function to capitalize first letter
+  const capitalize = (s) => {
+    if (typeof s !== "string") return "";
+    return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
   // Items to display drawer
@@ -138,21 +148,41 @@ const Layout = ({ children }) => {
           <Box className={classes.layout__welcome_text} flexGrow="1">
             <PendingPhrase />
           </Box>
-          <Box display="flex" ml="2rem" alignItems="center">
-            {/* Display user name */}
-            <Box className={classes.layout__username} mr="1rem">
-              <Typography>Hello, Name</Typography>
-            </Box>
-            {/* Display user avatar */}
-            <Box mr="1rem">
-              <Avatar src={adminAvatarUrl} />
-            </Box>
-            {/* Button Login/Logout */}
-            <Box>
-              <Button variant="outlined" color="inherit">
-                Button
+          {/* Button Login/Logout */}
+          <Box>
+            {auth ? (
+              <Box display="flex" ml="2rem" alignItems="center">
+                {/* Display user name */}
+                <Box className={classes.layout__username} mr="1rem">
+                  <Typography>
+                    Salut, {capitalize(auth?.email.split("@")[0])}
+                  </Typography>
+                </Box>
+                {/* Display user avatar */}
+                <Box mr="1rem">
+                  <Avatar src={adminAvatarUrl} />
+                </Box>
+                <Button
+                  className={classes.btn__logout}
+                  type="submit"
+                  variant="outlined"
+                  color="inherit"
+                  onClick={() => handleLogout()}
+                >
+                  Déconnexion
+                </Button>
+              </Box>
+            ) : (
+              <Button
+                className={classes.btn__login}
+                type="submit"
+                variant="outlined"
+                color="inherit"
+                onClick={() => navigate("/login")}
+              >
+                Connexion
               </Button>
-            </Box>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

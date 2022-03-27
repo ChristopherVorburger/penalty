@@ -52,7 +52,7 @@ export function AuthContextProvider(props) {
 
   // Use reducer
   const [state, dispatch] = React.useReducer(reducer, initialValue);
-  
+
   // Destructuring value
   const { email, password } = state;
 
@@ -92,6 +92,7 @@ export function AuthContextProvider(props) {
 
   // State for current authenticate user
   const [authUser, setAuthUser] = React.useState();
+  console.log("authUser", authUser);
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
