@@ -1,12 +1,12 @@
 import * as React from "react";
 
+import { Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { usePenalties } from "../../contexte/penaltiesContext";
+import { usePenalties } from "../../contexts/penaltiesContext";
 
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Typography } from "@mui/material";
 
 // Componant who return pending penalties
 const PendingPhrase = () => {
@@ -40,7 +40,7 @@ const PendingPhrase = () => {
     }
   }, [penalties, totalPenalties]);
 
-  return <Typography variant="h6">{penaltiesPendingPhrase}</Typography>;
+  return <Typography>{penaltiesPendingPhrase}</Typography>;
 };
 
 export default PendingPhrase;
