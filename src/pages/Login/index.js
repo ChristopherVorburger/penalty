@@ -1,8 +1,10 @@
 import React from "react";
 
+// MUI
 import { Box, Button, TextField, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
+// Context
 import { useAuth } from "../../contexts/authContext";
 
 const Login = () => {
@@ -17,6 +19,7 @@ const Login = () => {
 
   return (
     <Box pt="1rem" display="flex" justifyContent="center">
+      {/* Display login form */}
       <form noValidate autoComplete="off" onSubmit={handleLogin}>
         <Box mb="1rem">
           <TextField

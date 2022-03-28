@@ -7,6 +7,7 @@ import Layout from "../Layout";
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
 import Loader from "../Loader";
+import Penalties from "../../pages/Penalties";
 
 import { AuthContextProvider } from "../../contexts/authContext";
 import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
@@ -36,6 +37,7 @@ function PenaltyApp() {
                 <Routes>
                   <Route path="/" element={<Home />}></Route>
                   <Route path="/login" element={<Login />}></Route>
+                  <Route path="/penalties" element={<Penalties />}></Route>
                 </Routes>
               )}
             </Layout>

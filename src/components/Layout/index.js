@@ -67,12 +67,12 @@ const Layout = ({ children }) => {
     {
       text: "Listes des contraventions",
       icon: <ViewListIcon />,
-      path: "/heouss",
+      path: "/penalties",
     },
     {
       text: "Dresser un procès-verbal",
       icon: <PlaylistAddIcon />,
-      path: "/heouss/add",
+      path: "/penalties/add",
     },
     { text: "Galerie", icon: <CollectionsIcon />, path: "/gallery" },
     { text: "Beu Game", icon: <SportsEsportsIcon />, path: "/game" },
@@ -102,46 +102,20 @@ const Layout = ({ children }) => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate("/");
-                }}
-              >
-                Accueil
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate("/heouss");
-                }}
-              >
-                Liste des contraventions
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate("/heouss/add");
-                }}
-              >
-                Dresser un procès-verbal
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate("/gallery");
-                }}
-              >
-                Galerie
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate("memory-game");
-                }}
-              >
-                Beu Game
-              </MenuItem>
+              {menuItems.map((item) => {
+                return (
+                  <MenuItem
+                    key={item.text}
+                    divider={true}
+                    onClick={() => {
+                      handleClose();
+                      navigate(`${item.path}`);
+                    }}
+                  >
+                    {item.text}
+                  </MenuItem>
+                );
+              })}
             </Menu>
           </Box>
           {/* Welcome text */}
@@ -195,6 +169,7 @@ const Layout = ({ children }) => {
         classes={{ paper: classes.layout__drawer_paper }}
       >
         <List>
+          {/* Display menu */}
           {menuItems.map((item) => {
             return (
               <ListItem
