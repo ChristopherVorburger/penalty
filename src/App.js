@@ -3,11 +3,15 @@ import * as React from "react";
 
 import PenaltyApp from "./components/PenaltyApp";
 
+import { GlobalContextProvider } from "./contexts/globalContext";
+
 function App() {
   return (
     <>
-      <CssBaseline />
-      <PenaltyApp />
+      <GlobalContextProvider>
+        <CssBaseline />
+        <PenaltyApp />
+      </GlobalContextProvider>
     </>
   );
 }

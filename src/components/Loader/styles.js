@@ -5,6 +5,5 @@ export default makeStyles((theme) => ({
     position: "absolute",
     top: "50%",
     left: "50%",
-    marginRight: "-50%",
   },
 }));

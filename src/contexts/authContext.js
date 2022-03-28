@@ -10,6 +10,9 @@ import {
 // Import firebase/auth function getAuth()
 import { auth } from "../firebase-config";
 
+// Import global context
+import { useGlobal } from "../contexts/globalContext";
+
 // Create Authentification context
 export const AuthContext = React.createContext();
 
@@ -17,7 +20,7 @@ export const AuthContext = React.createContext();
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth() s'utilise avec <AuthContext.provider>");
+    throw new Error("useAuth() only can be used with <AuthContext.provider>");
   }
   return context;
 };
@@ -71,8 +74,11 @@ export function AuthContextProvider(props) {
   // Use reducer
   const [state, dispatch] = React.useReducer(reducer, initialValue);
 
-  // Destructuring value
+  // Destructuring values
   const { email, password, emptyFieldError, authError } = state;
+
+  // Using global context state to manage the loader
+  const { setLoading } = useGlobal();
 
   // Input action
   const inputAction = (event) => {
@@ -86,21 +92,23 @@ export function AuthContextProvider(props) {
   const handleLogin = (event) => {
     event.preventDefault();
     dispatch({ type: "CLEAR_ERROR" });
+    setLoading(true);
     if (!email || !password) {
-      console.log("erreur champs vide");
+      setLoading(false);
       dispatch({ type: "EMPTY_FIELD_ERROR" });
       return;
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          setLoading(false);
+          dispatch({ type: "CLEAR" });
+          navigate("/");
+        })
+        .catch(() => {
+          setLoading(false);
+          dispatch({ type: "AUTH_ERROR" });
+        });
     }
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        dispatch({ type: "CLEAR" });
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log("error email ou mdp incorrect", error.message);
-        dispatch({ type: "AUTH_ERROR" });
-      });
   };
 
   // Function to logout user
@@ -119,6 +127,7 @@ export function AuthContextProvider(props) {
       setAuthUser(currentUser);
       return unsubscribe;
     });
+    console.log("auth Contexte");
   }, []);
   return (
     <AuthContext.Provider

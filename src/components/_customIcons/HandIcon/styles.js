@@ -11,43 +11,61 @@ export default makeStyles((theme) => ({
     "0%": {
       transform: "rotate(90deg) translateY(0)",
     },
-    "6.25%": {
+    "5%": {
       transform: "rotate(90deg) translateY(-1px)",
     },
-    "12.5%": {
+    "10%": {
       transform: "rotate(90deg) translateY(-2px)",
+    },
+    "15%": {
+      transform: "rotate(90deg) translateY(-3px)",
+    },
+    "20%": {
+      transform: "rotate(90deg) translateY(-4px)",
     },
     "25%": {
-      transform: "rotate(90deg) translateY(-3px)",
-    },
-    "31.25%": {
-      transform: "rotate(90deg) translateY(-4px)",
-    },
-    "37.5%": {
       transform: "rotate(90deg) translateY(-5px)",
     },
-    "43.75%": {
+    "30%": {
       transform: "rotate(90deg) translateY(-6px)",
     },
-    "50%": {
+    "35%": {
       transform: "rotate(90deg) translateY(-7px)",
     },
-    "62.5%": {
+    "40%": {
+      transform: "rotate(90deg) translateY(-8px)",
+    },
+    "45%": {
+      transform: "rotate(90deg) translateY(-9px)",
+    },
+    "50%": {
+      transform: "rotate(90deg) translateY(-10px)",
+    },
+    "55%": {
+      transform: "rotate(90deg) translateY(-9px)",
+    },
+    "60%": {
+      transform: "rotate(90deg) translateY(-8px)",
+    },
+    "65%": {
+      transform: "rotate(90deg) translateY(-7px)",
+    },
+    "70%": {
       transform: "rotate(90deg) translateY(-6px)",
     },
-    "68.75%": {
+    "75%": {
       transform: "rotate(90deg) translateY(-5px)",
     },
-    "75%": {
+    "80%": {
       transform: "rotate(90deg) translateY(-4px)",
     },
-    "81.25%": {
+    "85%": {
       transform: "rotate(90deg) translateY(-3px)",
     },
-    "87.5%": {
+    "90%": {
       transform: "rotate(90deg) translateY(-2px)",
     },
-    "93.75%": {
+    "95%": {
       transform: "rotate(90deg) translateY(-1px)",
     },
     "100%": {
