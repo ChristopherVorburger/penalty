@@ -6,9 +6,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Layout from "../Layout";
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
+import Loader from "../Loader";
 
-import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
 import { AuthContextProvider } from "../../contexts/authContext";
+import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
+import { useGlobal } from "../../contexts/globalContext";
 
 const theme = createTheme({
   typography: {
@@ -21,16 +23,21 @@ const theme = createTheme({
 });
 
 function PenaltyApp() {
+  const { loading } = useGlobal();
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <PenaltiesContextProvider>
           <AuthContextProvider>
             <Layout>
-              <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/login" element={<Login />}></Route>
-              </Routes>
+              {loading ? (
+                <Loader />
+              ) : (
+                <Routes>
+                  <Route path="/" element={<Home />}></Route>
+                  <Route path="/login" element={<Login />}></Route>
+                </Routes>
+              )}
             </Layout>
           </AuthContextProvider>
         </PenaltiesContextProvider>

@@ -5,7 +5,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import { useAuth } from "../../contexts/authContext";
 
-const Login = ({ error }) => {
+const Login = () => {
   const {
     email,
     password,
@@ -42,14 +42,14 @@ const Login = ({ error }) => {
           />
         </Box>
         {emptyFieldError && (
-          <Box mb="1rem">
+          <Box mb="1rem" maxWidth="223px">
             <Typography color="error">
               Veuillez renseigner les champs requis
             </Typography>
           </Box>
         )}
         {authError && (
-          <Box mb="1rem">
+          <Box mb="1rem" maxWidth="223px">
             <Typography color="error">
               Email ou mot de passe incorrect
             </Typography>

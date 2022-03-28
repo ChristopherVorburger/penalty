@@ -42,4 +42,10 @@ export default makeStyles((theme) => ({
       display: "none",
     },
   },
+  layout__children: {
+    position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      position: "inherit",
+    },
+  },
 }));

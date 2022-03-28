@@ -27,13 +27,11 @@ export function PenaltiesContextProvider(props) {
 
   // Order query response
   const q = query(penaltiesCollectionRef, orderBy("created_at", "desc"));
-  console.log("Rendu composant");
 
   React.useEffect(() => {
     onSnapshot(q, (snapshot) => {
       setPenalties(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-    console.log("useEffect");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
