@@ -2,12 +2,11 @@ import React from "react";
 
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import PanToolRoundedIcon from "@mui/icons-material/PanToolRounded";
 
 import PendingPhrase from "../../components/PendingPhrase";
+import HandIcon from "../../components/_customIcons/HandIcon";
 
 import useStyles from "./styles";
-import HandIcon from "../../components/_customIcons/HandIcon";
 
 const Home = () => {
   const classes = useStyles();
