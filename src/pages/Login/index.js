@@ -5,7 +5,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import { useAuth } from "../../contexts/authContext";
 
-const Login = ({ error }) => {
+const Login = () => {
   const {
     email,
     password,
