@@ -40,7 +40,7 @@ const PendingPhrase = () => {
     }
   }, [penalties, totalPenalties]);
 
-  return <Typography variant="h6">{penaltiesPendingPhrase}</Typography>;
+  return <Typography>{penaltiesPendingPhrase}</Typography>;
 };
 
 export default PendingPhrase;

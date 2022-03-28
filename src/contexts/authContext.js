@@ -25,15 +25,31 @@ export const useAuth = () => {
 // Reducer for login form
 const reducer = (state, action) => {
   switch (action.type) {
-    case "update":
+    case "UPDATE":
       return {
         ...state,
         [action.payload.key]: action.payload.value,
       };
-    case "clear":
+    case "CLEAR":
       return {
         email: "",
         password: "",
+      };
+    case "CLEAR_ERROR":
+      return {
+        ...state,
+        emptyFieldError: false,
+        authError: false,
+      };
+    case "EMPTY_FIELD_ERROR":
+      return {
+        ...state,
+        emptyFieldError: true,
+      };
+    case "AUTH_ERROR":
+      return {
+        ...state,
+        authError: true,
       };
     default:
       throw new Error(`Unknown action type: ${action.type}`);
@@ -48,18 +64,20 @@ export function AuthContextProvider(props) {
   const initialValue = {
     email: "",
     password: "",
+    emptyFieldError: false,
+    authError: false,
   };
 
   // Use reducer
   const [state, dispatch] = React.useReducer(reducer, initialValue);
 
   // Destructuring value
-  const { email, password } = state;
+  const { email, password, emptyFieldError, authError } = state;
 
   // Input action
   const inputAction = (event) => {
     dispatch({
-      type: "update",
+      type: "UPDATE",
       payload: { key: event.target.name, value: event.target.value },
     });
   };
@@ -67,19 +85,21 @@ export function AuthContextProvider(props) {
   // Function to login user
   const handleLogin = (event) => {
     event.preventDefault();
+    dispatch({ type: "CLEAR_ERROR" });
     if (!email || !password) {
       console.log("erreur champs vide");
+      dispatch({ type: "EMPTY_FIELD_ERROR" });
       return;
     }
+
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        dispatch({ type: "clear" });
+        dispatch({ type: "CLEAR" });
         navigate("/");
       })
       .catch((error) => {
-        if (error.message === "Firebase: Error (auth/invalid-email).") {
-          console.log("error", error.message);
-        }
+        console.log("error email ou mdp incorrect", error.message);
+        dispatch({ type: "AUTH_ERROR" });
       });
   };
 
@@ -105,10 +125,12 @@ export function AuthContextProvider(props) {
       value={{
         handleLogin,
         handleLogout,
+        inputAction,
         authUser,
         email,
         password,
-        inputAction,
+        emptyFieldError,
+        authError,
       }}
     >
       {props.children}

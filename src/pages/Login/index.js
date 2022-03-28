@@ -5,8 +5,15 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 import { useAuth } from "../../contexts/authContext";
 
-const Profil = ({ error }) => {
-  const { email, password, inputAction, handleLogin } = useAuth();
+const Login = ({ error }) => {
+  const {
+    email,
+    password,
+    emptyFieldError,
+    authError,
+    inputAction,
+    handleLogin,
+  } = useAuth();
 
   return (
     <Box pt="1rem" display="flex" justifyContent="center">
@@ -34,9 +41,20 @@ const Profil = ({ error }) => {
             type="password"
           />
         </Box>
-        <Typography color="error">
-          {error ? "Email ou mot de passe incorrect" : ""}
-        </Typography>
+        {emptyFieldError && (
+          <Box mb="1rem">
+            <Typography color="error">
+              Veuillez renseigner les champs requis
+            </Typography>
+          </Box>
+        )}
+        {authError && (
+          <Box mb="1rem">
+            <Typography color="error">
+              Email ou mot de passe incorrect
+            </Typography>
+          </Box>
+        )}
         <Button
           type="submit"
           variant="outlined"
@@ -49,4 +67,4 @@ const Profil = ({ error }) => {
   );
 };
 
-export default Profil;
+export default Login;
