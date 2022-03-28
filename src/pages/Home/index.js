@@ -7,6 +7,7 @@ import PanToolRoundedIcon from "@mui/icons-material/PanToolRounded";
 import PendingPhrase from "../../components/PendingPhrase";
 
 import useStyles from "./styles";
+import HandIcon from "../../components/_customIcons/HandIcon";
 
 const Home = () => {
   const classes = useStyles();
@@ -36,12 +37,7 @@ const Home = () => {
             type="button"
             variant="outlined"
             className={classes.home__button_submit}
-            endIcon={
-              <PanToolRoundedIcon
-                fontSize="large"
-                className={classes.home__icon_hand}
-              />
-            }
+            endIcon={<HandIcon />}
             onClick={playSound}
             sx={{ textTransform: "none" }}
           >

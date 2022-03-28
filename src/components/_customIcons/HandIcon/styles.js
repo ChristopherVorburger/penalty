@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
     color: "pink",
     animation: `$myEffect 0.8s infinite ease`,
     fontSize: "2rem!important",
+    margin: "0.5rem",
   },
   "@keyframes myEffect": {
     "0%": {
