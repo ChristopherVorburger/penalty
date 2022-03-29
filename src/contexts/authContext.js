@@ -100,8 +100,8 @@ export function AuthContextProvider(props) {
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          setLoading(false);
           dispatch({ type: "CLEAR" });
+          setLoading(false);
           navigate("/");
         })
         .catch(() => {
