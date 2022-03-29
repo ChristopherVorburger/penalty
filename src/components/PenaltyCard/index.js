@@ -26,6 +26,7 @@ import { useAuth } from "../../contexts/authContext";
 
 // Styles
 import useStyles from "./styles";
+import { Box } from "@mui/system";
 
 const PenaltyCard = ({ penalty }) => {
   const classes = useStyles();
@@ -77,14 +78,19 @@ const PenaltyCard = ({ penalty }) => {
           penalty?.done ? (
             <Typography>Acquittée</Typography>
           ) : (
-            <Typography>
-              Sentence : {penalty?.number} heouss <HandIcon />
-            </Typography>
+            <Box display="flex" alignItems="center">
+              <Typography>Sentence : {penalty?.number} heouss</Typography>
+              <HandIcon />
+            </Box>
           )
         }
       />
       <CardContent>
-        <Typography mb="1rem" color="textSecondary">
+        <Typography
+          sx={{ overflowWrap: "anywhere" }}
+          mb="1rem"
+          color="textSecondary"
+        >
           {penalty?.comment}
         </Typography>
 
