@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Layout from "../Layout";
+import Loader from "../Loader";
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
-import Loader from "../Loader";
 import Penalties from "../../pages/Penalties";
 import AddPenalty from "../../pages/AddPenalty";
+import EditPenaltyDialog from "../EditPenaltyDialog";
 
 import { AuthContextProvider } from "../../contexts/authContext";
 import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
@@ -40,6 +41,10 @@ function PenaltyApp() {
                   <Route path="/login" element={<Login />}></Route>
                   <Route path="/penalties" element={<Penalties />}></Route>
                   <Route path="/penalties/add" element={<AddPenalty />}></Route>
+                  <Route
+                    path="/penalties/:id"
+                    element={<EditPenaltyDialog />}
+                  ></Route>
                 </Routes>
               )}
             </Layout>
