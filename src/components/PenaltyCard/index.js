@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // MUI
 import {
@@ -23,6 +24,7 @@ import { database } from "../../firebase-config";
 
 // Context
 import { useAuth } from "../../contexts/authContext";
+import { useGlobal } from "../../contexts/globalContext";
 
 // Styles
 import useStyles from "./styles";
@@ -30,7 +32,9 @@ import { Box } from "@mui/system";
 
 const PenaltyCard = ({ penalty }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const { authUser: auth } = useAuth();
+  const { setOpenEditDialog } = useGlobal();
 
   // Handle delete penalty? submit
   const handleDeleteSubmit = (id) => {
@@ -48,7 +52,14 @@ const PenaltyCard = ({ penalty }) => {
         action={
           auth?.email === process.env.REACT_APP_ADMIN_EMAIL ? (
             <>
-              <IconButton onClick={() => console.log("edit penalty")}>
+              <IconButton
+                onClick={() => {
+                  return (
+                    setOpenEditDialog(true),
+                    navigate(`/penalties/${penalty?.id} `)
+                  );
+                }}
+              >
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => handleDeleteSubmit(penalty?.id)}>

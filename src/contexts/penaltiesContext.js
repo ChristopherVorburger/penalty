@@ -1,6 +1,12 @@
 import * as React from "react";
 
-import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
+import {
+  onSnapshot,
+  collection,
+  query,
+  orderBy,
+  doc,
+} from "firebase/firestore";
 
 import { database } from "../firebase-config";
 
@@ -25,6 +31,9 @@ export function PenaltiesContextProvider(props) {
   // Collection reference
   const penaltiesCollectionRef = collection(database, "penalties");
 
+  // Penalty reference
+  const penaltyRef = (id) => doc(database, "penalties", id);
+
   // Order query response
   const q = query(penaltiesCollectionRef, orderBy("created_at", "desc"));
 
@@ -36,7 +45,9 @@ export function PenaltiesContextProvider(props) {
   }, []);
 
   return (
-    <PenaltiesContext.Provider value={{ penalties, penaltiesCollectionRef }}>
+    <PenaltiesContext.Provider
+      value={{ penalties, penaltiesCollectionRef, penaltyRef }}
+    >
       {props.children}
     </PenaltiesContext.Provider>
   );

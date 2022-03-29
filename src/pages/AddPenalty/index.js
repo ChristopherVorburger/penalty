@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 // Components
-import HandHeouss from "../../components/_customIcons/HandIcon";
+import HandIcon from "../../components/_customIcons/HandIcon";
 
 // Firestore
 import { addDoc, serverTimestamp } from "firebase/firestore";
@@ -20,7 +20,7 @@ import { useGlobal } from "../../contexts/globalContext";
 // Styles
 import useStyles from "./styles";
 
-// Reducer login form
+// Reducer add penalty form
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE":
@@ -183,10 +183,10 @@ const NewHeouss = () => {
             type="submit"
             variant="outlined"
             className={classes.add_penalty__button_submit}
-            endIcon={<HandHeouss />}
+            endIcon={<HandIcon />}
             sx={{ textTransform: "none", mt: "1rem" }}
           >
-            Ajouter un nouvel heouss
+            Valider le procès-verbal
           </Button>
         )}
       </form>

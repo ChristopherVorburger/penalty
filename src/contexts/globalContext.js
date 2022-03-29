@@ -17,8 +17,12 @@ export const useGlobal = () => {
 // Create context provider
 export function GlobalContextProvider(props) {
   const [loading, setLoading] = React.useState(false);
+  const [openEditDialog, setOpenEditDialog] = React.useState(false);
+
   return (
-    <GlobalContext.Provider value={{ loading, setLoading }}>
+    <GlobalContext.Provider
+      value={{ loading, setLoading, openEditDialog, setOpenEditDialog }}
+    >
       {props.children}
     </GlobalContext.Provider>
   );
