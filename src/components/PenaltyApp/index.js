@@ -9,6 +9,7 @@ import Home from "../../pages/Home";
 import Login from "../../pages/Login";
 import Penalties from "../../pages/Penalties";
 import AddPenalty from "../../pages/AddPenalty";
+import Gallery from "../../pages/Gallery";
 import EditPenaltyDialog from "../EditPenaltyDialog";
 
 import { AuthContextProvider } from "../../contexts/authContext";
@@ -45,6 +46,7 @@ function PenaltyApp() {
                     path="/penalties/:id"
                     element={<EditPenaltyDialog />}
                   ></Route>
+                  <Route path="/gallery" element={<Gallery />}></Route>
                 </Routes>
               )}
             </Layout>

@@ -33,14 +33,22 @@ import { Box } from "@mui/system";
 const PenaltyCard = ({ penalty }) => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { setLoading } = useGlobal();
   const { authUser: auth } = useAuth();
   const { setOpenEditDialog } = useGlobal();
 
-  // Handle delete penalty? submit
+  // Handle delete penalty submit
   const handleDeleteSubmit = (id) => {
     const docRef = doc(database, "penalties", id);
-
-    deleteDoc(docRef);
+    setLoading(true);
+    deleteDoc(docRef)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err.message);
+      });
   };
 
   return (
