@@ -5,11 +5,12 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Container,
   IconButton,
   Typography,
 } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
+import HandIcon from "../_customIcons/HandIcon";
 
 // Date fns
 import { zonedTimeToUtc } from "date-fns-tz";
@@ -30,7 +31,7 @@ const PenaltyCard = ({ penalty }) => {
   const classes = useStyles();
   const { authUser: auth } = useAuth();
 
-  // Handle delete penalty submit
+  // Handle delete penalty? submit
   const handleDeleteSubmit = (id) => {
     const docRef = doc(database, "penalties", id);
 
@@ -38,62 +39,72 @@ const PenaltyCard = ({ penalty }) => {
   };
 
   return (
-    <Container>
-      {/* Display penalty card */}
-      <Card
-        elevation={3}
-        className={penalty.done ? classes.penalty_card__done : ""}
-      >
-        <CardHeader
-          action={
-            // If admin connected, display trash to delete penalty
-            auth?.email === process.env.REACT_APP_ADMIN_EMAIL ? (
-              <>
-                <IconButton onClick={() => handleDeleteSubmit(penalty.id)}>
-                  <DeleteOutline />
-                </IconButton>
-              </>
-            ) : (
-              ""
-            )
-          }
-          title={
-            <Typography
-              variant="h6"
-              className={
-                penalty.done
-                  ? classes.penalty_card__checked
-                  : classes.penalty_card__link
-              }
-            >
-              Motif : {penalty.motive}
-            </Typography>
-          }
-          subheader={
-            penalty.done ? `Acquittée` : `Sentence : ${penalty.number} heouss`
-          }
-        />
-        <CardContent>
-          <Typography m="1rem 0" color="textSecondary">
-            {penalty.comment}
+    <Card
+      elevation={2}
+      className={penalty?.done ? classes.penalty_card__done : ""}
+    >
+      <CardHeader
+        action={
+          auth?.email === process.env.REACT_APP_ADMIN_EMAIL ? (
+            <>
+              <IconButton onClick={() => console.log("edit penalty")}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => handleDeleteSubmit(penalty?.id)}>
+                <DeleteOutline />
+              </IconButton>
+            </>
+          ) : (
+            <IconButton onClick={() => console.log("edit penalty")}>
+              <EditIcon />
+            </IconButton>
+          )
+        }
+        title={
+          <Typography
+            variant="h6"
+            sx={{ overflowWrap: "anywhere" }}
+            className={
+              penalty?.done
+                ? classes.penalty_card__checked
+                : classes.penalty_card
+            }
+          >
+            Motif : {penalty?.motive}
           </Typography>
+        }
+        subheader={
+          penalty?.done ? (
+            <Typography>Acquittée</Typography>
+          ) : (
+            <Typography>
+              Sentence : {penalty?.number} heouss <HandIcon />
+            </Typography>
+          )
+        }
+      />
+      <CardContent>
+        <Typography mb="1rem" color="textSecondary">
+          {penalty?.comment}
+        </Typography>
 
+        {penalty?.created_at !== null && (
           <Typography color="textSecondary">
-            {penalty.done
+            {penalty?.done
               ? `Date et heure de l'encaissement : ${format(
-                  new Date(zonedTimeToUtc(penalty.created_at.toDate())),
-                  "d MMMM y H:mm:ss",
+                  new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
+                  "d MMMM y HH:mm:ss",
                   { locale: fr }
                 )}`
               : `Date et heure de l'infraction : ${format(
-                  new Date(zonedTimeToUtc(penalty.created_at.toDate())),
-                  "d MMMM y H:mm:ss",
+                  new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
+                  "d MMMM y HH:mm:ss",
                   { locale: fr }
                 )}`}
           </Typography>
-        </CardContent>
-      </Card>
-    </Container>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 

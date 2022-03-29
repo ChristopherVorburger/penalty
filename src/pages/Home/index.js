@@ -1,11 +1,14 @@
 import React from "react";
 
+// MUI
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 
+// Components
 import PendingPhrase from "../../components/PendingPhrase";
 import HandIcon from "../../components/_customIcons/HandIcon";
 
+// Styles
 import useStyles from "./styles";
 
 const Home = () => {
@@ -13,12 +16,13 @@ const Home = () => {
 
   const audioTune = new Audio("/sound/MerciThomas.mp3");
 
-  // get audio
+  // Load audio
   React.useEffect(() => {
     audioTune.load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Function to play sound on click
   const playSound = () => {
     audioTune.play();
   };

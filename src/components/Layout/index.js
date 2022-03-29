@@ -198,8 +198,8 @@ const Layout = ({ children }) => {
         <Box
           className={classes.layout__children}
           sx={{
-            background: "#f4f4f4",
             height: "100vh",
+            backgroundColor: "#f4f4f4",
           }}
         >
           {children}

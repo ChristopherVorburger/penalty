@@ -16,14 +16,8 @@ const Penalties = () => {
 
   return (
     <Container>
-      <Grid
-        container
-        direction="column"
-        spacing={5}
-        sx={{ paddingTop: "1rem" }}
-      >
-        {/* Display penalty cards */}
-        {penalties?.map((penalty) => (
+      <Grid pt="1rem" container direction="column" spacing={5}>
+        {penalties.map((penalty) => (
           <Grid item key={penalty.id}>
             <PenaltyCard penalty={penalty} />
           </Grid>
