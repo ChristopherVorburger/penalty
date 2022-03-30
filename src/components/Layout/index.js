@@ -51,8 +51,6 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const { authUser: auth, handleLogout } = useAuth();
 
-  console.log("auth", auth);
-
   // Functions to open and close modale
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
