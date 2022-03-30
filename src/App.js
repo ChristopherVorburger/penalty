@@ -6,17 +6,15 @@ import { CssBaseline } from "@mui/material";
 // Components
 import PenaltyApp from "./components/PenaltyApp";
 
-// Context
-import { GlobalContextProvider } from "./contexts/globalContext";
+// Contexts
+import { AppProviders } from "./contexts";
 
 function App() {
   return (
-    <>
-      <GlobalContextProvider>
-        <CssBaseline />
-        <PenaltyApp />
-      </GlobalContextProvider>
-    </>
+    <AppProviders>
+      <CssBaseline />
+      <PenaltyApp />
+    </AppProviders>
   );
 }
 
