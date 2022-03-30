@@ -43,20 +43,23 @@ export function GlobalContextProvider(props) {
     setOpenSnackbar(false);
   };
 
+  const value = React.useMemo(
+    () => ({
+      loading,
+      setLoading,
+      openEditDialog,
+      setOpenEditDialog,
+      error,
+      setError,
+      setOpenSnackbar,
+      setSnackbarMessage,
+      setSnackbarColor,
+    }),
+    [error, loading, openEditDialog]
+  );
+
   return (
-    <GlobalContext.Provider
-      value={{
-        loading,
-        setLoading,
-        openEditDialog,
-        setOpenEditDialog,
-        error,
-        setError,
-        setOpenSnackbar,
-        setSnackbarMessage,
-        setSnackbarColor,
-      }}
-    >
+    <GlobalContext.Provider value={value}>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

@@ -82,44 +82,55 @@ export function AuthContextProvider(props) {
     useGlobal();
 
   // Input action
-  const inputAction = (event) => {
+  const inputAction = React.useCallback((event) => {
     dispatch({
       type: "UPDATE",
       payload: { key: event.target.name, value: event.target.value },
     });
-  };
+  }, []);
 
   // Function to login user
-  const handleLogin = (event) => {
-    event.preventDefault();
-    dispatch({ type: "CLEAR_ERROR" });
-    setLoading(true);
-    if (!email || !password) {
-      setLoading(false);
-      dispatch({ type: "EMPTY_FIELD_ERROR" });
-      return;
-    } else {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          dispatch({ type: "CLEAR" });
-          setLoading(false);
-          navigate("/");
-          setSnackbarMessage("Connexion réussie ! Bienvenue");
-          setSnackbarColor("success");
-          setOpenSnackbar(true);
-        })
-        .catch(() => {
-          setLoading(false);
-          dispatch({ type: "AUTH_ERROR" });
-          setSnackbarMessage("Impossible de se connecter");
-          setSnackbarColor("error");
-          setOpenSnackbar(true);
-        });
-    }
-  };
+  const handleLogin = React.useCallback(
+    (event) => {
+      event.preventDefault();
+      dispatch({ type: "CLEAR_ERROR" });
+      setLoading(true);
+      if (!email || !password) {
+        setLoading(false);
+        dispatch({ type: "EMPTY_FIELD_ERROR" });
+        return;
+      } else {
+        signInWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            dispatch({ type: "CLEAR" });
+            setLoading(false);
+            navigate("/");
+            setSnackbarMessage("Connexion réussie ! Bienvenue");
+            setSnackbarColor("success");
+            setOpenSnackbar(true);
+          })
+          .catch(() => {
+            setLoading(false);
+            dispatch({ type: "AUTH_ERROR" });
+            setSnackbarMessage("Impossible de se connecter");
+            setSnackbarColor("error");
+            setOpenSnackbar(true);
+          });
+      }
+    },
+    [
+      email,
+      navigate,
+      password,
+      setLoading,
+      setOpenSnackbar,
+      setSnackbarColor,
+      setSnackbarMessage,
+    ]
+  );
 
   // Function to logout user
-  const handleLogout = () => {
+  const handleLogout = React.useCallback(() => {
     signOut(auth)
       .then(() => {
         navigate("/");
@@ -132,7 +143,7 @@ export function AuthContextProvider(props) {
         setSnackbarColor("error");
         setOpenSnackbar(true);
       });
-  };
+  }, [navigate, setOpenSnackbar, setSnackbarColor, setSnackbarMessage]);
 
   // State for current authenticate user
   const [authUser, setAuthUser] = React.useState();
@@ -143,20 +154,31 @@ export function AuthContextProvider(props) {
       return unsubscribe;
     });
   }, []);
+
+  const value = React.useMemo(
+    () => ({
+      handleLogin,
+      handleLogout,
+      inputAction,
+      authUser,
+      email,
+      password,
+      emptyFieldError,
+      authError,
+    }),
+    [
+      handleLogin,
+      handleLogout,
+      inputAction,
+      authUser,
+      email,
+      password,
+      emptyFieldError,
+      authError,
+    ]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{
-        handleLogin,
-        handleLogout,
-        inputAction,
-        authUser,
-        email,
-        password,
-        emptyFieldError,
-        authError,
-      }}
-    >
-      {props.children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
   );
 }
