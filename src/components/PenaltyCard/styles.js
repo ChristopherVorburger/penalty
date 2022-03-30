@@ -10,5 +10,4 @@ export default makeStyles((theme) => ({
   penalty_card__checked: {
     color: "green",
   },
-  penalty__icons: {},
 }));

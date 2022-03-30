@@ -78,7 +78,8 @@ export function AuthContextProvider(props) {
   const { email, password, emptyFieldError, authError } = state;
 
   // Using global context state to manage the loader
-  const { setLoading } = useGlobal();
+  const { setLoading, setOpenSnackbar, setSnackbarMessage, setSnackbarColor } =
+    useGlobal();
 
   // Input action
   const inputAction = (event) => {
@@ -103,10 +104,16 @@ export function AuthContextProvider(props) {
           dispatch({ type: "CLEAR" });
           setLoading(false);
           navigate("/");
+          setSnackbarMessage("Connexion réussie ! Bienvenue");
+          setSnackbarColor("success");
+          setOpenSnackbar(true);
         })
         .catch(() => {
           setLoading(false);
           dispatch({ type: "AUTH_ERROR" });
+          setSnackbarMessage("Impossible de se connecter");
+          setSnackbarColor("error");
+          setOpenSnackbar(true);
         });
     }
   };
@@ -114,8 +121,17 @@ export function AuthContextProvider(props) {
   // Function to logout user
   const handleLogout = () => {
     signOut(auth)
-      .then(() => navigate("/"))
-      .catch((error) => console.log("error.message", error.message));
+      .then(() => {
+        navigate("/");
+        setSnackbarMessage("Déconnexion réussie ! À bientôt");
+        setSnackbarColor("success");
+        setOpenSnackbar(true);
+      })
+      .catch(() => {
+        setSnackbarMessage("Erreur lors de la déconnexion");
+        setSnackbarColor("error");
+        setOpenSnackbar(true);
+      });
   };
 
   // State for current authenticate user
