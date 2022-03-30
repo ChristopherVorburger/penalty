@@ -13,7 +13,6 @@ const PendingPhrase = () => {
   const [penaltiesPendingPhrase, setPenaltiesPendingPhrase] =
     React.useState("");
   const { penalties } = usePenalties();
-  console.log("penalties", penalties);
 
   // Sum of the total penalties
   const totalPenalties = penalties?.map(

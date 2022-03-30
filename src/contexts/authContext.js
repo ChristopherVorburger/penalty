@@ -120,14 +120,12 @@ export function AuthContextProvider(props) {
 
   // State for current authenticate user
   const [authUser, setAuthUser] = React.useState();
-  console.log("authUser", authUser);
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setAuthUser(currentUser);
       return unsubscribe;
     });
-    console.log("auth Contexte");
   }, []);
   return (
     <AuthContext.Provider
