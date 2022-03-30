@@ -1,12 +1,27 @@
 import * as React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Typography } from "@mui/material";
 
 import Layout from "../Layout";
+import Loader from "../Loader";
+import Home from "../../pages/Home";
+import Login from "../../pages/Login";
+import Penalties from "../../pages/Penalties";
+import AddPenalty from "../../pages/AddPenalty";
+import Gallery from "../../pages/Gallery";
+import MemoryGame from "../../pages/MemoryGame";
+import EditPenaltyDialog from "../EditPenaltyDialog";
 
-import { PenaltiesContextProvider } from "../../contexte/penaltiesContext";
+import { AuthContextProvider } from "../../contexts/authContext";
+import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
+import { useGlobal } from "../../contexts/globalContext";
+import ScrollToTop from "../ScrollToTop";
 
 const theme = createTheme({
   typography: {
@@ -19,15 +34,34 @@ const theme = createTheme({
 });
 
 function PenaltyApp() {
+  const { loading } = useGlobal();
   return (
     <ThemeProvider theme={theme}>
-      <PenaltiesContextProvider>
-        <Router>
-          <Layout>
-            <Typography variant="h3">Hello World</Typography>
-          </Layout>
-        </Router>
-      </PenaltiesContextProvider>
+      <Router>
+        <ScrollToTop />
+        <PenaltiesContextProvider>
+          <AuthContextProvider>
+            <Layout>
+              {loading ? (
+                <Loader />
+              ) : (
+                <Routes>
+                  <Route path="/" element={<Home />}></Route>
+                  <Route path="/login" element={<Login />}></Route>
+                  <Route path="/penalties" element={<Penalties />}></Route>
+                  <Route path="/penalties/add" element={<AddPenalty />}></Route>
+                  <Route
+                    path="/penalties/:id"
+                    element={<EditPenaltyDialog />}
+                  ></Route>
+                  <Route path="/gallery" element={<Gallery />}></Route>
+                  <Route path="/game" element={<MemoryGame />}></Route>
+                </Routes>
+              )}
+            </Layout>
+          </AuthContextProvider>
+        </PenaltiesContextProvider>
+      </Router>
     </ThemeProvider>
   );
 }

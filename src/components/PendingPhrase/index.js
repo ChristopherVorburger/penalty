@@ -1,19 +1,18 @@
 import * as React from "react";
 
+import { Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { usePenalties } from "../../contexte/penaltiesContext";
+import { usePenalties } from "../../contexts/penaltiesContext";
 
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Typography } from "@mui/material";
 
 // Componant who return pending penalties
 const PendingPhrase = () => {
   const [penaltiesPendingPhrase, setPenaltiesPendingPhrase] =
     React.useState("");
   const { penalties } = usePenalties();
-  console.log("penalties", penalties);
 
   // Sum of the total penalties
   const totalPenalties = penalties?.map(
