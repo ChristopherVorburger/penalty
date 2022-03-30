@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
+// MUI
 import { Box, Button, Typography } from "@mui/material";
 
+// Components
 import HandIcon from "../_customIcons/HandIcon";
 
 // Error FallBack for Error Boundary
