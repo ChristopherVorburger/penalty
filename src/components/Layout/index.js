@@ -151,22 +151,22 @@ const Layout = ({ children }) => {
                   )}
                 </Box>
                 <Button
-                  className={classes.btn__logout}
                   type="submit"
                   variant="outlined"
                   color="inherit"
                   onClick={() => handleLogout()}
+                  sx={{ textTransform: "none" }}
                 >
                   Déconnexion
                 </Button>
               </Box>
             ) : (
               <Button
-                className={classes.btn__login}
                 type="submit"
                 variant="outlined"
                 color="inherit"
                 onClick={() => navigate("/login")}
+                sx={{ textTransform: "none" }}
               >
                 Connexion
               </Button>

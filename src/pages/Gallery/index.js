@@ -37,7 +37,8 @@ import useStyles from "./styles";
 
 const Gallery = () => {
   const classes = useStyles();
-  const { setLoading } = useGlobal();
+  const { setLoading, setOpenSnackbar, setSnackbarMessage, setSnackbarColor } =
+    useGlobal();
   const { authUser: auth } = useAuth();
 
   const [photos, setPhotos] = React.useState();
@@ -88,17 +89,22 @@ const Gallery = () => {
             behavior: "smooth",
           });
           setLoading(false);
+          setSnackbarMessage("Photo ajoutée avec succès !");
+          setSnackbarColor("success");
+          setOpenSnackbar(true);
         })
         .catch((err) => {
           setLoading(false);
-          console.log(err.message);
+          setSnackbarMessage("Impossible d'ajouter la photo");
+          setSnackbarColor("error");
+          setOpenSnackbar(true);
         });
     }
   };
 
   // Masonry breakpoints
   const breakpoints = {
-    default: 3,
+    default: 4,
     1100: 2,
     700: 1,
   };
@@ -109,10 +115,15 @@ const Gallery = () => {
     deleteDoc(docRef)
       .then(() => {
         setLoading(false);
+        setSnackbarMessage("Photo supprimée avec succès !");
+        setSnackbarColor("success");
+        setOpenSnackbar(true);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoading(false);
-        console.log(err.message);
+        setSnackbarMessage("Impossible de supprimer la photo");
+        setSnackbarColor("error");
+        setOpenSnackbar(true);
       });
   };
 

@@ -1,5 +1,9 @@
 import * as React from "react";
 
+// MUI
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 // Create GlobalContext
 export const GlobalContext = React.createContext();
 
@@ -14,11 +18,30 @@ export const useGlobal = () => {
   return context;
 };
 
+// Alert Snackbar
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 // Create context provider
 export function GlobalContextProvider(props) {
   const [loading, setLoading] = React.useState(false);
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const [error, setError] = React.useState(false);
+
+  // States snackbar
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [snackbarMessage, setSnackbarMessage] = React.useState("");
+  const [snackbarColor, setSnackbarColor] = React.useState("success");
+
+  // Handle close snackbar
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
 
   return (
     <GlobalContext.Provider
@@ -29,8 +52,24 @@ export function GlobalContextProvider(props) {
         setOpenEditDialog,
         error,
         setError,
+        setOpenSnackbar,
+        setSnackbarMessage,
+        setSnackbarColor,
       }}
     >
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbarColor}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
       {props.children}
     </GlobalContext.Provider>
   );

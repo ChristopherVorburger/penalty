@@ -35,7 +35,12 @@ const PenaltyCard = ({ penalty }) => {
   const navigate = useNavigate();
   const { setLoading } = useGlobal();
   const { authUser: auth } = useAuth();
-  const { setOpenEditDialog } = useGlobal();
+  const {
+    setOpenEditDialog,
+    setOpenSnackbar,
+    setSnackbarMessage,
+    setSnackbarColor,
+  } = useGlobal();
 
   // Handle delete penalty submit
   const handleDeleteSubmit = (id) => {
@@ -44,10 +49,15 @@ const PenaltyCard = ({ penalty }) => {
     deleteDoc(docRef)
       .then(() => {
         setLoading(false);
+        setSnackbarMessage("Contravention supprimée avec succès !");
+        setSnackbarColor("success");
+        setOpenSnackbar(true);
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        setSnackbarMessage("Erreur lors de la suppression");
+        setSnackbarColor("error");
+        setOpenSnackbar(true);
       });
   };
 
@@ -120,21 +130,21 @@ const PenaltyCard = ({ penalty }) => {
           {penalty?.comment}
         </Typography>
 
-        {/* {penalty?.created_at !== null && ( */}
-        <Typography color="textSecondary">
-          {penalty?.done
-            ? `Date et heure de l'encaissement : ${format(
-                new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
-                "d MMMM y HH:mm:ss",
-                { locale: fr }
-              )}`
-            : `Date et heure de l'infraction : ${format(
-                new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
-                "d MMMM y HH:mm:ss",
-                { locale: fr }
-              )}`}
-        </Typography>
-        {/* )} */}
+        {penalty?.created_at !== null && (
+          <Typography color="textSecondary">
+            {penalty?.done
+              ? `Date et heure de l'encaissement : ${format(
+                  new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
+                  "d MMMM y HH:mm:ss",
+                  { locale: fr }
+                )}`
+              : `Date et heure de l'infraction : ${format(
+                  new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
+                  "d MMMM y HH:mm:ss",
+                  { locale: fr }
+                )}`}
+          </Typography>
+        )}
       </CardContent>
     </Card>
   );

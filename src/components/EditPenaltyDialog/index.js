@@ -76,7 +76,16 @@ export default function EditPenaltyDialog() {
   // Using contexts
   const { authUser: auth } = useAuth();
   const { penalties, penaltyRef } = usePenalties();
-  const { openEditDialog, setOpenEditDialog } = useGlobal();
+
+  // Using global context state to manage the loader, snackbars and edit modal
+  const {
+    openEditDialog,
+    setOpenEditDialog,
+    setLoading,
+    setOpenSnackbar,
+    setSnackbarMessage,
+    setSnackbarColor,
+  } = useGlobal();
 
   // Search of penalty who match with the url id param
   const matchedPenalty = penalties.filter((penalty) => {
@@ -131,11 +140,8 @@ export default function EditPenaltyDialog() {
     });
   };
 
-  // Using global context state to manage the loader
-  const { setLoading } = useGlobal();
-
-  // Handle add new penalty
-  const handleAddSubmit = (e) => {
+  // Handle edit penalty
+  const handleEditPenaltySubmit = (e) => {
     e.preventDefault();
     dispatch({ type: "CLEAR_ERROR" });
 
@@ -159,10 +165,15 @@ export default function EditPenaltyDialog() {
             dispatch({ type: "CLEAR" });
             setLoading(false);
             navigate("/penalties");
+            setSnackbarMessage("Contravention modifiée avec succès !");
+            setSnackbarColor("success");
+            setOpenSnackbar(true);
           })
-          .catch((err) => {
+          .catch(() => {
             setLoading(false);
-            console.log(err.message);
+            setSnackbarMessage("Erreur lors de la modification");
+            setSnackbarColor("error");
+            setOpenSnackbar(true);
           });
       } else {
         updateDoc(penaltyRef(id), {
@@ -176,10 +187,15 @@ export default function EditPenaltyDialog() {
             dispatch({ type: "CLEAR" });
             setLoading(false);
             navigate("/penalties");
+            setSnackbarMessage("Contravention modifiée avec succès !");
+            setSnackbarColor("success");
+            setOpenSnackbar(true);
           })
-          .catch((err) => {
+          .catch(() => {
             setLoading(false);
-            console.log(err.message);
+            setSnackbarMessage("Erreur lors de la modification");
+            setSnackbarColor("error");
+            setOpenSnackbar(true);
           });
       }
     }
@@ -195,7 +211,11 @@ export default function EditPenaltyDialog() {
       >
         <DialogTitle>Éditer la contravention</DialogTitle>
         <DialogContent>
-          <form noValidate autoComplete="off" onSubmit={handleAddSubmit}>
+          <form
+            noValidate
+            autoComplete="off"
+            onSubmit={handleEditPenaltySubmit}
+          >
             <TextField
               name="motive"
               value={motive}

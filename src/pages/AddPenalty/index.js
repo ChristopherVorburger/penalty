@@ -93,8 +93,9 @@ const NewHeouss = () => {
     });
   };
 
-  // Using global context state to manage the loader
-  const { setLoading } = useGlobal();
+  // Using global context state to manage the loader and snackbars
+  const { setLoading, setOpenSnackbar, setSnackbarMessage, setSnackbarColor } =
+    useGlobal();
 
   // Handle add new penalty
   const handleAddSubmit = (e) => {
@@ -120,10 +121,15 @@ const NewHeouss = () => {
           dispatch({ type: "CLEAR" });
           setLoading(false);
           navigate("/penalties");
+          setSnackbarMessage("Contravention ajoutée avec succès !");
+          setSnackbarColor("success");
+          setOpenSnackbar(true);
         })
         .catch((err) => {
           setLoading(false);
-          console.log(err.message);
+          setSnackbarMessage("Erreur lors de la création");
+          setSnackbarColor("error");
+          setOpenSnackbar(true);
         });
     }
   };
