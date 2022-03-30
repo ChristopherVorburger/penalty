@@ -32,7 +32,10 @@ export function PenaltiesContextProvider(props) {
   const penaltiesCollectionRef = collection(database, "penalties");
 
   // Penalty reference
-  const penaltyRef = (id) => doc(database, "penalties", id);
+  const penaltyRef = React.useCallback(
+    (id) => doc(database, "penalties", id),
+    []
+  );
 
   // Order query response
   const q = query(penaltiesCollectionRef, orderBy("created_at", "desc"));
@@ -44,10 +47,17 @@ export function PenaltiesContextProvider(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const value = React.useMemo(
+    () => ({
+      penalties,
+      penaltiesCollectionRef,
+      penaltyRef,
+    }),
+    [penalties, penaltiesCollectionRef, penaltyRef]
+  );
+
   return (
-    <PenaltiesContext.Provider
-      value={{ penalties, penaltiesCollectionRef, penaltyRef }}
-    >
+    <PenaltiesContext.Provider value={value}>
       {props.children}
     </PenaltiesContext.Provider>
   );
