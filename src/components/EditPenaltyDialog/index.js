@@ -185,8 +185,6 @@ export default function EditPenaltyDialog() {
     }
   };
 
-  console.log("done", done);
-
   return (
     <Box>
       <Dialog

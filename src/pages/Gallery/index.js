@@ -61,8 +61,6 @@ const Gallery = () => {
 
     const photoRef = ref(storage, `photos/${photoSelected.name}`);
 
-    console.log("photoRef", photoRef);
-
     const photoName = e.target.name.value;
 
     if (photoSelected.name === undefined) {
