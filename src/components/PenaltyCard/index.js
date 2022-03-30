@@ -75,7 +75,14 @@ const PenaltyCard = ({ penalty }) => {
               </IconButton>
             </>
           ) : (
-            <IconButton onClick={() => console.log("edit penalty")}>
+            <IconButton
+              onClick={() => {
+                return (
+                  setOpenEditDialog(true),
+                  navigate(`/penalties/${penalty?.id} `)
+                );
+              }}
+            >
               <EditIcon />
             </IconButton>
           )
@@ -113,21 +120,21 @@ const PenaltyCard = ({ penalty }) => {
           {penalty?.comment}
         </Typography>
 
-        {penalty?.created_at !== null && (
-          <Typography color="textSecondary">
-            {penalty?.done
-              ? `Date et heure de l'encaissement : ${format(
-                  new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
-                  "d MMMM y HH:mm:ss",
-                  { locale: fr }
-                )}`
-              : `Date et heure de l'infraction : ${format(
-                  new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
-                  "d MMMM y HH:mm:ss",
-                  { locale: fr }
-                )}`}
-          </Typography>
-        )}
+        {/* {penalty?.created_at !== null && ( */}
+        <Typography color="textSecondary">
+          {penalty?.done
+            ? `Date et heure de l'encaissement : ${format(
+                new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
+                "d MMMM y HH:mm:ss",
+                { locale: fr }
+              )}`
+            : `Date et heure de l'infraction : ${format(
+                new Date(zonedTimeToUtc(penalty?.created_at?.toDate())),
+                "d MMMM y HH:mm:ss",
+                { locale: fr }
+              )}`}
+        </Typography>
+        {/* )} */}
       </CardContent>
     </Card>
   );

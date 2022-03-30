@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 import Loader from "../../components/Loader";
 import PenaltyCard from "../../components/PenaltyCard";
@@ -12,6 +12,13 @@ const Penalties = () => {
 
   if (!penalties) {
     return <Loader />;
+  }
+  if (penalties.length === 0) {
+    return (
+      <Typography textAlign="center" variant="h6">
+        Aucune contravention, étrange...
+      </Typography>
+    );
   }
 
   return (

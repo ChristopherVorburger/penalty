@@ -29,8 +29,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 // Import styles
 import useStyles, { drawerWidth } from "./styles";
+
+// Components
 import PendingPhrase from "../PendingPhrase";
-import { adminAvatarUrl } from "../../utils/helpers";
+
+// Images
+import { adminAvatarUrl, userAvatarUrl } from "../../utils/helpers";
 
 // Contexts
 import { useAuth } from "../../contexts/authContext";
@@ -74,7 +78,12 @@ const Layout = ({ children }) => {
       icon: <PlaylistAddIcon />,
       path: "/penalties/add",
     },
-    { text: "Galerie", icon: <CollectionsIcon />, path: "/gallery" },
+    {
+      text: "Galerie",
+      icon: <CollectionsIcon />,
+      path: "/gallery",
+      disabled: !auth ? true : false,
+    },
     { text: "Beu Game", icon: <SportsEsportsIcon />, path: "/game" },
   ];
   return (
@@ -111,6 +120,7 @@ const Layout = ({ children }) => {
                       handleClose();
                       navigate(`${item.path}`);
                     }}
+                    disabled={item.disabled}
                   >
                     {item.text}
                   </MenuItem>
@@ -134,7 +144,11 @@ const Layout = ({ children }) => {
                 </Box>
                 {/* Display user avatar */}
                 <Box mr="1rem">
-                  <Avatar src={adminAvatarUrl} />
+                  {auth.email === process.env.REACT_APP_ADMIN_EMAIL ? (
+                    <Avatar src={adminAvatarUrl} />
+                  ) : (
+                    <Avatar src={userAvatarUrl} />
+                  )}
                 </Box>
                 <Button
                   className={classes.btn__logout}
@@ -182,6 +196,7 @@ const Layout = ({ children }) => {
                 }
                 button={true}
                 sx={{ p: "1rem" }}
+                disabled={item.disabled}
               >
                 <ListItemIcon classes={{ root: classes.layout__menu_icon }}>
                   {item.icon}
