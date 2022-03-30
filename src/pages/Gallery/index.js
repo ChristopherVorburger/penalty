@@ -53,7 +53,8 @@ const Gallery = () => {
     onSnapshot(photosCollectionRef, (snapshot) => {
       setPhotos(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-  }, [photosCollectionRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleUpload = async (e) => {
     e.preventDefault();
