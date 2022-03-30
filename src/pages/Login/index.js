@@ -2,7 +2,9 @@ import React from "react";
 
 // MUI
 import { Box, Button, TextField, Typography } from "@mui/material";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+
+// Components
+import HandIcon from "../../components/_customIcons/HandIcon";
 
 // Context
 import { useAuth } from "../../contexts/authContext";
@@ -58,11 +60,7 @@ const Login = () => {
             </Typography>
           </Box>
         )}
-        <Button
-          type="submit"
-          variant="outlined"
-          endIcon={<KeyboardArrowRightIcon />}
-        >
+        <Button type="submit" variant="outlined" endIcon={<HandIcon />}>
           Se connecter
         </Button>
       </form>

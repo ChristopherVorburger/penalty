@@ -2,8 +2,10 @@ import * as React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
+// MUI
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+// Components
 import ScrollToTop from "../ScrollToTop";
 import Layout from "../Layout";
 import Loader from "../Loader";
@@ -16,10 +18,12 @@ import MemoryGame from "../../pages/MemoryGame";
 import EditPenaltyDialog from "../EditPenaltyDialog";
 import ErrorFallback from "../../components/ErrorFallback";
 
+// Contexts
 import { AuthContextProvider } from "../../contexts/authContext";
 import { PenaltiesContextProvider } from "../../contexts/penaltiesContext";
 import { useGlobal } from "../../contexts/globalContext";
 
+// Theme MUI
 const theme = createTheme({
   typography: {
     fontFamily: "Quicksand",
