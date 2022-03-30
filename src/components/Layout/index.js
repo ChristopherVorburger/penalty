@@ -29,8 +29,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 // Import styles
 import useStyles, { drawerWidth } from "./styles";
+
+// Components
 import PendingPhrase from "../PendingPhrase";
-import { adminAvatarUrl } from "../../utils/helpers";
+
+// Images
+import { adminAvatarUrl, userAvatarUrl } from "../../utils/helpers";
 
 // Contexts
 import { useAuth } from "../../contexts/authContext";
@@ -46,6 +50,8 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { authUser: auth, handleLogout } = useAuth();
+
+  console.log("auth", auth);
 
   // Functions to open and close modale
   const handleClick = (event) => {
@@ -134,7 +140,11 @@ const Layout = ({ children }) => {
                 </Box>
                 {/* Display user avatar */}
                 <Box mr="1rem">
-                  <Avatar src={adminAvatarUrl} />
+                  {auth.email === process.env.REACT_APP_ADMIN_EMAIL ? (
+                    <Avatar src={adminAvatarUrl} />
+                  ) : (
+                    <Avatar src={userAvatarUrl} />
+                  )}
                 </Box>
                 <Button
                   className={classes.btn__logout}
