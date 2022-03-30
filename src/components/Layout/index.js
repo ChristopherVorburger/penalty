@@ -80,7 +80,12 @@ const Layout = ({ children }) => {
       icon: <PlaylistAddIcon />,
       path: "/penalties/add",
     },
-    { text: "Galerie", icon: <CollectionsIcon />, path: "/gallery" },
+    {
+      text: "Galerie",
+      icon: <CollectionsIcon />,
+      path: "/gallery",
+      disabled: !auth ? true : false,
+    },
     { text: "Beu Game", icon: <SportsEsportsIcon />, path: "/game" },
   ];
   return (
@@ -117,6 +122,7 @@ const Layout = ({ children }) => {
                       handleClose();
                       navigate(`${item.path}`);
                     }}
+                    disabled={item.disabled}
                   >
                     {item.text}
                   </MenuItem>
@@ -192,6 +198,7 @@ const Layout = ({ children }) => {
                 }
                 button={true}
                 sx={{ p: "1rem" }}
+                disabled={item.disabled}
               >
                 <ListItemIcon classes={{ root: classes.layout__menu_icon }}>
                   {item.icon}
