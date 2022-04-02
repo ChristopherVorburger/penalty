@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
   const menuItems = [
     { text: "Accueil", icon: <HomeIcon />, path: "/" },
     {
-      text: "Listes des contraventions",
+      text: "Liste des contraventions",
       icon: <ViewListIcon />,
       path: "/penalties",
     },
@@ -197,6 +197,7 @@ const Layout = ({ children }) => {
                 button={true}
                 sx={{ p: "1rem" }}
                 disabled={item.disabled}
+                name={item.text}
               >
                 <ListItemIcon classes={{ root: classes.layout__menu_icon }}>
                   {item.icon}

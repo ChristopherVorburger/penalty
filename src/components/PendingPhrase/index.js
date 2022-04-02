@@ -39,7 +39,9 @@ const PendingPhrase = () => {
     }
   }, [penalties, totalPenalties]);
 
-  return <Typography>{penaltiesPendingPhrase}</Typography>;
+  return (
+    <Typography name="pending-phrase">{penaltiesPendingPhrase}</Typography>
+  );
 };
 
 export default PendingPhrase;

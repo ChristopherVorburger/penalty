@@ -45,5 +45,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
+    "cypress": "^9.5.3",
+    "cypress-firebase": "^2.2.1",
+    "firebase-admin": "^9.12.0"
   }
 }
