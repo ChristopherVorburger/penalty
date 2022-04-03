@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // MUI
 import {
@@ -31,6 +32,7 @@ import useStyles from "./styles";
 import { Box } from "@mui/system";
 
 const PenaltyCard = ({ penalty }) => {
+  console.log("penalty", penalty);
   const classes = useStyles();
   const navigate = useNavigate();
   const { setLoading } = useGlobal();
@@ -148,6 +150,20 @@ const PenaltyCard = ({ penalty }) => {
       </CardContent>
     </Card>
   );
+};
+
+PenaltyCard.propTypes = {
+  penalty: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    motive: PropTypes.string.isRequired,
+    created_at: PropTypes.shape({
+      nanoseconds: PropTypes.number.isRequired,
+      seconds: PropTypes.number.isRequired,
+    }),
+    done: PropTypes.bool.isRequired,
+    number: PropTypes.number.isRequired,
+    comment: PropTypes.string,
+  }),
 };
 
 export default PenaltyCard;
