@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
 // Components
@@ -28,16 +28,14 @@ function PenaltyApp() {
           <Loader />
         ) : (
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/penalties" element={<Penalties />}></Route>
-            <Route path="/penalties/add" element={<AddPenalty />}></Route>
-            <Route
-              path="/penalties/:id"
-              element={<EditPenaltyDialog />}
-            ></Route>
-            <Route path="/gallery" element={<Gallery />}></Route>
-            <Route path="/game" element={<MemoryGame />}></Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/penalties" element={<Penalties />} />
+            <Route path="/penalties/add" element={<AddPenalty />} />
+            <Route path="/penalties/:id" element={<EditPenaltyDialog />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/game" element={<MemoryGame />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         )}
       </Layout>
