@@ -22,7 +22,12 @@ const Login = () => {
   return (
     <Box pt="1rem" display="flex" justifyContent="center">
       {/* Display login form */}
-      <form noValidate autoComplete="off" onSubmit={handleLogin}>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleLogin}
+        data-test-id={"form"}
+      >
         <Box mb="1rem">
           <TextField
             name="email"
@@ -60,7 +65,12 @@ const Login = () => {
             </Typography>
           </Box>
         )}
-        <Button type="submit" variant="outlined" endIcon={<HandIcon />}>
+        <Button
+          type="submit"
+          variant="outlined"
+          endIcon={<HandIcon />}
+          sx={{ textTransform: "none" }}
+        >
           Se connecter
         </Button>
       </form>
