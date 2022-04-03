@@ -32,7 +32,6 @@ import useStyles from "./styles";
 import { Box } from "@mui/system";
 
 const PenaltyCard = ({ penalty }) => {
-  console.log("penalty", penalty);
   const classes = useStyles();
   const navigate = useNavigate();
   const { setLoading } = useGlobal();
